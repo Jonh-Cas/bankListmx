@@ -14,14 +14,12 @@ const SplashScreen = ({ navigation }: Props) => {
 
     return (
             <SafeAreaView style={styles.mainContainer} >
-               
                 <View style={ styles.viewShadow } >
                     <Image
                         source={require('../assets/logo.jpeg')}
-                        style={{ height: 250, width: 300, borderRadius: 18,  }}
+                        style={ styles.imageContainer }
                     />
                 </View>
-
                 <Text style={ styles.title } >My Bank</Text>
             </SafeAreaView>
 
@@ -38,8 +36,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#11BB33'
     },
 
-    viewShadow: {
+    imageContainer: {
+        height: 250, 
+        width: 300, 
+        borderRadius: 18, 
+    },
 
+    viewShadow: {
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

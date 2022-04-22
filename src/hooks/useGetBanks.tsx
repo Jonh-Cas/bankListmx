@@ -1,10 +1,10 @@
-import { View, Text } from 'react-native'
-import React, { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import apiBack from '../api/apiBanks'
+
 
 const useGetBanks = () => {
   
-
+  const [bankList, setBankList] = useState([])
 
   useEffect(() => {
     
