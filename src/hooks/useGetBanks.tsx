@@ -1,22 +1,53 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react';
 import apiBack from '../api/apiBanks'
+import { BankListInt } from '../interfaces/BankListInterface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { addDocument, getDocument } from '../firebase/firestore';
+
 
 
 const useGetBanks = () => {
   
-  const [bankList, setBankList] = useState([])
+  const [bankList, setBankList] = useState<BankListInt[]>([])
+  const isMounted = useRef(true);
 
   useEffect(() => {
-    
-    apiBack.get('').then( elements =>  {
-      console.log(elements.data);
-    })
+
+    if( isMounted.current  ){
+      
+
+        apiBack.get<BankListInt[]>('').then( elements =>  {
+          if( isMounted.current ){
+            setBankList(elements.data);
+            AsyncStorage.setItem( 'banks', JSON.stringify(elements.data) )
+          }
+        })
+      
+      
+    }
+    return () => {
+      isMounted.current = false;
+    }
   
   }, [])
+
+  // const getBanksData = async () => {
+
+  //   const banks = await AsyncStorage.getItem('banks')
+    
+  //   if( banks ){
+  //     getDocument()
+  //   }else{
+
+  //   }
+
+  // }
+
+
   
   
     return {
-
+      bankList
   }
 }
 
