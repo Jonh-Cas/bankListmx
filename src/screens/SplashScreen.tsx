@@ -1,9 +1,17 @@
+import { StackScreenProps } from '@react-navigation/stack';
 import React from 'react'
 import { View, Text, StyleSheet, Image, SafeAreaView } from 'react-native'
+import { StackAppParams } from '../interfaces/StackAppParams';
+import useTimeout from '../hooks/useTimeout';
 
+interface Props extends StackScreenProps<StackAppParams, 'SplashScreen'>{}
 
+const SplashScreen = ({ navigation }: Props) => {
 
-const SplashScreen = () => {
+    const time = 2500;
+    const func = () => navigation.navigate('BankListScreen');
+    useTimeout({ time, func });
+
     return (
             <SafeAreaView style={styles.mainContainer} >
                
@@ -47,6 +55,6 @@ const styles = StyleSheet.create({
         marginTop: 20, 
         fontSize: 25, 
         fontWeight: 'bold', 
-        color: '#000' 
+        color: '#FFF' 
     }
 })
